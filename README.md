@@ -189,11 +189,7 @@ except KeyboardInterrupt:
 
 ### OUPUT  
 
-# FIGURE -07 ADD TITILE HERE 
 
-#  FIGURE -08 ADD TITILE HERE 
-
-# FIGURE -09 ADD TITLE HERE 
 
 
 
