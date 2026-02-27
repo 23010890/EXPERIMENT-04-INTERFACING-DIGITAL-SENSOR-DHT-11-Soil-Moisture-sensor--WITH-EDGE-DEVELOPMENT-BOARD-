@@ -130,12 +130,60 @@ while True:
 ## PROGRAM (Python)
 ### Experiment 4B
 ```
+import RPi.GPIO as GPIO
+import time
+import paho.mqtt.client as mqtt
+import json
 
+# ---------------- GPIO Setup ----------------
+DIGITAL_PIN = 24   # D0 connected to GPIO 23
 
- 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(DIGITAL_PIN, GPIO.IN)
 
+# ---------------- MQTT Setup ----------------
+broker = "97825dc4ffeb4ef69020a34b200834d7.s1.eu.hivemq.cloud"
+port = 8883
+topic = "Soil Moisture"
 
+username = "hivemq.webclient.1772178873750"
+password = "9yj!U%ix7#Do3H2.VMGc"
 
+client = mqtt.Client()
+client.username_pw_set(username, password)
+client.tls_set()  # Required for HiveMQ Cloud (TLS)
+
+client.connect(broker, port)
+client.loop_start()
+
+print("Connected to HiveMQ Cloud")
+
+# ---------------- Main Loop ----------------
+try:
+    while True:
+        digital_value = GPIO.input(DIGITAL_PIN)
+
+        # Convert Digital Value
+        if digital_value == 0:
+            moisture_status = "WET"
+            humidity_value = 100
+        else:
+            moisture_status = "DRY"
+            humidity_value = 0
+
+        payload = {
+            "temperature": humidity_value,  # shown like temperature
+            "humidity": moisture_status     # shown like humidity
+        }
+
+        client.publish(topic, json.dumps(payload))
+        print("Published:", payload)
+
+        time.sleep(2)
+
+except KeyboardInterrupt:
+    GPIO.cleanup()
+    print("Program Stopped")
  
 ````
 
