@@ -120,11 +120,10 @@ while True:
 ### OUPUT  
 
 ![WhatsApp Image 2026-02-27 at 1 21 49 PM](https://github.com/user-attachments/assets/25d2b24e-6870-4f53-ad7a-fe125e7eadc0)
-
-
-<img width="1910" height="897" alt="Screenshot 2026-02-26 143810" src="https://github.com/user-attachments/assets/efeafa40-5875-44a0-8bfd-0cfadb591cf5" />
  
 ![WhatsApp Image 2026-02-27 at 1 22 25 PM](https://github.com/user-attachments/assets/1c310c38-ab02-4699-bef1-1bd844d374b6)
+
+<img width="1910" height="897" alt="Screenshot 2026-02-26 143810" src="https://github.com/user-attachments/assets/efeafa40-5875-44a0-8bfd-0cfadb591cf5" />
 
 
 ## PROGRAM (Python)
@@ -136,7 +135,7 @@ import paho.mqtt.client as mqtt
 import json
 
 # ---------------- GPIO Setup ----------------
-DIGITAL_PIN = 24   # D0 connected to GPIO 23
+DIGITAL_PIN = 23   # D0 connected to GPIO 23
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(DIGITAL_PIN, GPIO.IN)
@@ -188,10 +187,11 @@ except KeyboardInterrupt:
 ````
 
 ### OUPUT  
+4![WhatsApp Image 2026-02-27 at 1 52 56 PM](https://github.com/user-attachments/assets/3e51a810-7668-4f1c-bbd7-11c4cdf73424)
 
+![WhatsApp Image 2026-02-27 at 1 58 23 PM](https://github.com/user-attachments/assets/65fa5d37-f7c0-45a4-b803-b325f1299da8)
 
-
-
+<img width="1919" height="895" alt="Screenshot 2026-02-27 134657" src="https://github.com/user-attachments/assets/113b74b4-fbc6-43c6-890a-a64e771a0712" />
 
 
 ## **RESULT:**  
