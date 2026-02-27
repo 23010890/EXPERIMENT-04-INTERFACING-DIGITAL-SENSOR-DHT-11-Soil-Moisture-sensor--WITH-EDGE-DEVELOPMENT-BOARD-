@@ -2,10 +2,10 @@
 
 ---
 
-### **NAME:**  
-### **DEPARTMENT:**  
-### **ROLL NO:**  
-### **DATE OF EXPERIMENT:**  
+### **NAME: DHARSHINI S**  
+### **DEPARTMENT: CSE(IOT)**  
+### **ROLL NO: 212223110010**  
+### **DATE OF EXPERIMENT: 26-02-2026**  
 
 ---
 
@@ -63,29 +63,72 @@ Connect the Soil Moisture Sensor (REES52) GND to any GND.
 Connect the Soil Moisture Sensor (REES52) D0 to any one GPIO. 
 Connect the Soil Moisture Sensor (REES52) A0 to any one GPIO. 
 
-Experiment 4A
+
 ## PROGRAM (Python)
+### Experiment 4A
 ```
+import Adafruit_DHT
+import paho.mqtt.client as mqtt
+import ssl
+import time
 
+# ---------------- DHT11 Setup ----------------
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 18   # GPIO4
 
- 
+# ---------------- HiveMQ Cloud Credentials ----------------
+MQTT_BROKER = "97825dc4ffeb4ef69020a34b200834d7.s1.eu.hivemq.cloud"
+MQTT_PORT = 8883
+MQTT_USER = "hivemq.webclient.1772094968723"
+MQTT_PASSWORD = "5O$4#qIHeaETiQ1js&0<"
 
+TEMP_TOPIC = "raspberrypi/dht/temperature"
+HUM_TOPIC = "raspberrypi/dht/humidity"
 
+# ---------------- MQTT Setup ----------------
+client = mqtt.Client()
 
+client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+client.tls_set(tls_version=ssl.PROTOCOL_TLS)
+client.connect(MQTT_BROKER, MQTT_PORT)
+
+print("Connected to HiveMQ Cloud")
+print("Reading DHT11 Sensor...\n")
+
+# ---------------- Main Loop ----------------
+while True:
+    humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
+
+    if humidity is not None and temperature is not None:
+        print(f"Temperature = {temperature} °C")
+        print(f"Humidity    = {humidity} %")
+        print("---------------------------")
+
+        # Publish to HiveMQ
+        client.publish(TEMP_TOPIC, temperature)
+        client.publish(HUM_TOPIC, humidity)
+
+        print("Data sent to HiveMQ\n")
+
+    else:
+        print("Sensor failure. Check wiring.")
+
+    time.sleep(10)
  
 ````
 
 ### OUPUT  
-Experiment 4A
 
-# FIGURE -04 ADD TITILE HERE 
+![WhatsApp Image 2026-02-27 at 1 21 49 PM](https://github.com/user-attachments/assets/25d2b24e-6870-4f53-ad7a-fe125e7eadc0)
 
-#  FIGURE -05 ADD TITILE HERE 
 
-# FIGURE -06 ADD TITLE HERE 
+<img width="1910" height="897" alt="Screenshot 2026-02-26 143810" src="https://github.com/user-attachments/assets/efeafa40-5875-44a0-8bfd-0cfadb591cf5" />
+ 
+![WhatsApp Image 2026-02-27 at 1 22 25 PM](https://github.com/user-attachments/assets/1c310c38-ab02-4699-bef1-1bd844d374b6)
 
-Experiment 4B
+
 ## PROGRAM (Python)
+### Experiment 4B
 ```
 
 
